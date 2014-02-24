@@ -1,0 +1,164 @@
+%        File: appunti.tex
+%     Created: Mon Feb 24 02:00 PM 2014 C
+% Last Change: Mon Feb 24 02:00 PM 2014 C
+%
+\documentclass[a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\newcommand{\bnfn}{\ \mathrm{b.f.}\ }
+\newcommand{\sse}{se e solo se}
+\newcommand{\tc}{\ \mathrm{t.c.}\ }
+\newcommand{\prop}{\mathcal{P}}
+\newcommand{\base}[1]{\mathtt{base}_{#1}}
+
+\theoremstyle{definition} \newtheorem*{defi}{Def}
+\theoremstyle{plain} \newtheorem{lemma}{Lemma}
+\theoremstyle{plain} \newtheorem{teo}{Teorema}
+\theoremstyle{remark} \newtheorem*{es}{Esempio}
+
+\begin{document}
+\chapter{Induzione strutturale}
+\section*{Introduzione}
+Sia $A$ un insieme, sia $\lhd$ una relazione binaria definita su $A$
+($\lhd : A \times A$).
+\begin{defi}
+  $\lhd$ è $\bnfn$ (ben fondata) se $\nexists \ldots \lhd a_i \lhd \ldots \lhd a_1 \lhd a_0$
+  \\
+  ovvero non esistono catene infinite discendenti.
+  \\
+  $(A, \lhd)$ è un insieme ben fondato se $\lhd$ è $\bnfn$
+\end{defi}
+Sia $\unlhd$ la chiusura riflessiva e transitiva di $\lhd \ \bnfn$ su $A$.
+\begin{lemma}
+  $\unlhd$ non è mai $\bnfn$
+\end{lemma}
+\begin{proof}
+  Sia $a_i \in A$. $\exists \ldots a_i \unlhd a_i \unlhd \ldots$ \qedhere
+\end{proof}
+\begin{defi}
+  Sia $a \in A$. $a$ è \emph{minimale} in $A$ rispetto a $\lhd$ se
+  $\forall b \lhd a, b \not\in A$.
+\end{defi}
+\begin{lemma}
+  \label{lemma:2}
+  $\lhd$ è ben fondato su $A$ \sse ogni $B \subseteq A$ ha un elemento
+  minimale rispetto a $\lhd$.
+\end{lemma}
+\begin{proof}
+  \begin{itemize}
+    \item{$\Rightarrow$)} Da $ B \subseteq A$ e $(A, \lhd) \bnfn$ si ha che
+      non esiste $\ldots \lhd b_i \lhd \ldots \lhd b_0$, quindi 
+      $\exists b_n \tc b_n \lhd \ldots \lhd b_i \lhd \ldots \lhd b_0$
+      ovvero $b_n$ è minimale in $B$ rispetto a $\lhd$.
+    \item{$\Leftarrow$)} Per assurdo. Supponiamo che esista
+      $\ldots \lhd a_i \lhd \ldots \lhd a_0$, ovvero $\neg (\lhd \bnfn)$.
+      Allora l'insieme $B=\{a_i|i\in\mathbb{N}\}$ (insieme degli elementi
+      della sequenza) non ha un minimale, cosa che contraddice l'ipotesi.
+      Quindi una tale sequenza non esiste, ovvero $\lhd \bnfn$
+  \end{itemize}
+\end{proof}
+
+\section{Principio di induzione noetheriana}
+\begin{teo}[Principio di induzione noetheriana (prima forma)]
+  Sia $\prop$ una proprietà su $(A, \lhd) \bnfn$.\\
+  \[
+    \forall a \in A.\prop(a) \Leftrightarrow 
+    \forall a \in A.([\forall b \lhd a . \prop(b)] 
+    \Rightarrow \prop(a))
+  \]
+\end{teo}
+\begin{proof}
+  \begin{itemize}
+    \item{$\Rightarrow$)} Ovvia.
+    \item{$\Leftarrow$)} Per assurdo.\\
+      Supponiamo
+      \begin{equation}
+        \forall a \in A.([\forall b \lhd a.\prop(b)]
+        \Leftarrow \prop(a))
+      \end{equation}
+      e
+      \begin{equation}
+        \exists c \in A .\neg\prop(c)
+      \end{equation}
+      Sia $C=\{c \in A | \neg \prop(c)\} \subseteq A$.\\
+      Per il lemma \ref{lemma:2}, $\exists \hat{c}$ minimale di $C$ rispetto a 
+      $\lhd$, allora $\neg \prop(\hat{c})$\\
+      Per $\hat{c}$ minimale, $\forall b \lhd \hat{c}.b \not\in C$, allora
+      $\prop(b)$, ovvero per (1.1) $\prop(\hat{c})$
+  \end{itemize}
+\end{proof}
+
+\begin{defi}
+  $\base{A}=\{a \in A | a$ è minimale in $A$ rispetto a $\lhd \}$.\\
+  Osserviamo che $\forall a \in \base{A}, \forall b \in A . b \ntriangleleft a$.
+\end{defi}
+
+\begin{teo}[Principio di induzione noetheriana - seconda forma]
+  Sia $\prop$ una proprietà su $(A, \lhd) \bnfn$.\\
+  \[
+    \forall a \in A.\prop(a) \Leftrightarrow 
+    \begin{pmatrix} 
+      \forall a \in \base{A}.\prop(a)\\
+      \wedge\\
+      \forall a \in (A \setminus \base{A})
+      .([\forall b \lhd a . \prop(b)] \Rightarrow \prop(a))
+    \end{pmatrix}
+  \]
+\end{teo}
+
+\begin{teo}[Induzione matematica]
+  Sia $A=\mathbb{N}$.\\
+  Sia $n \lhd m \Leftrightarrow m=n+1 \quad n,m \in \mathbb{N}$.\\
+  Osserviamo che $\lhd$ è ben fondata: $0\lhd1\lhd2\lhd\dots$.\\
+  Osserviamo $\base{\mathbb{N}}=\{0\}$.
+  \[
+    \forall m \in \mathbb{N}.\prop(m) \Leftrightarrow 
+    \begin{pmatrix} 
+      \prop(0)\\
+      \wedge\\
+      \forall m > 0
+      .(\prop(m-1) \Rightarrow \prop(m))
+    \end{pmatrix}
+  \]
+\end{teo}
+
+\begin{defi}
+  $a^\lhd=\{b \in A|b \lhd a\}$ con $(A,\lhd)\bnfn$.
+\end{defi}
+\begin{defi}
+  Sia $f: A \rightarrow B$, sia $A' \subseteq A$.
+  $f_{|A'}=\{(a, f(a))|a \in A'\}$.
+\end{defi}
+
+\begin{teo}[di ricorsione / delle definizione noetheriane]
+  Sia $(A,\lhd)\bnfn$
+  \[
+    \forall a \in A, \forall h:a^\lhd \rightarrow B.
+    F(a,h) \in B
+  \]
+  ($F$ è detta \emph{operatore di composizione}). Allora
+  \[
+    \exists! f: A \rightarrow B \tc
+    \forall a \in A.f(a)=F(a,f_{|a^\lhd})
+  \]
+\end{teo}
+\begin{es}
+  Sia $A=\mathbb{N}$, sia $n \lhd m \Leftrightarrow m=n+1$.\\
+  \[
+    \mathtt{Fact}(n)=
+    \begin{cases}
+      1 & \text{se } n=0\\
+      n \cdot \mathtt{Fact}(n-1) & \text{se } n>0
+    \end{cases}
+  \]
+  In questo caso, $f = \mathtt{Fact}$ e $F$ è la moltiplicazione.\\
+  $f(n)=F(n,f(n-1))=n \cdot f(n-1)$
+\end{es}
+
+\end{document}
+
+
