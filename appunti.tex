@@ -8,6 +8,7 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{relsize}
 
 \newcommand{\bnfn}{\ \mathrm{b.f.}\ }
 \newcommand{\sse}{se e solo se}
@@ -160,6 +161,68 @@ Sia $\unlhd$ la chiusura riflessiva e transitiva di $\lhd \ \bnfn$ su $A$.
   $f(n)=F(n,f(n-1))=n \cdot f(n-1)$
 \end{es}
 
+\chapter{Definizione di Linguaggio}
+TODO
+\paragraph{Composizionalit\'a:}
+la propriet\'a per cui ciascuna stringa deve essere funzione solo dei componenti della stringa stessa.
+\paragraph{Modularit\'a:}
+la propriet\'a per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo ridefinire la semantica dello stesso.
+\begin{itemize}
+\item posso quindi definire un linguaggio in maniera incrementale, ovvero, partendo da un nucleo centrale, posso aggiungere dello "zucchero sintattico" senza modificare il nucleo di partenza.
+\end{itemize}
+
+\chapter{Semantica}
+\begin{itemize}
+\item {\bf Operazionale:} COME eseguire un programma $P$.
+\item {\bf Denotazionale:} CHE COSA si ottiene dall'esecuzione di $P$.
+\item {\bf Assiomatica:} verifica SE il programma \'e corretto rispetto ad una data propriet\'a.
+\end{itemize}
+
+\begin{defi} dato un programma $P$:
+\begin{equation}
+{\ldots}z:=2; y:=z; y:=y+1; z:=y{\ldots}
+\end{equation}
+il {\bf supporto a tempo di esecuzione} \'e definito come:
+\begin{equation}
+[z=0, y=0] \equiv \rho(z) = 0, \rho(y) = 0
+\end{equation}
+TODO
+\end{defi}
+\newpage
+\section{Semantica operazionale}
+\begin{defi} 
+Un {\bf sistema di transizione} $T_G$ \'e un grafo t.c.
+$$
+T_G = ( P \times \rho , \longrightarrow , I , F  )
+$$
+dove
+\begin{itemize}
+\item $P$ sono i programmi (ad es. assegnazioni di (3.1))
+\item $\rho$ sono gli ambienti del supporto a tempo di esecuzione (ad es. (3.2))
+\item $ \longrightarrow \, \, \subseteq ( P , \rho ) \times ( P , \rho ) $
+\item $ I \subseteq ( P,\rho)$ iniziali
+\item $ F \subseteq (P, \rho)$ finali
+\end{itemize}
+\end{defi}
+
+\begin{defi}
+La {\bf semantica operazionale} \'e una funzione 
+$$
+\mathlarger{\mathlarger{\mathlarger{\varepsilon_{op}}}} : L(G) \times \mathlarger{\mathlarger{\rho}}_{init} \longrightarrow T_G
+$$ 
+\end{defi}
+
+\section{Semantica denotazionale}
+\begin{defi}
+La {\bf semantica denotazionale} \'e definita come
+$$
+\mathlarger{\mathlarger{\mathlarger{\varepsilon_{den}}}} : L(G) \times \mathlarger{\mathlarger{\rho}}_{init} \longrightarrow \mathlarger{\mathlarger{\rho}}_{fin}
+$$
+\end{defi}
+Rappresenta solo il risultato dell'esecuzione del programma, ovvero l'insieme degli ambienti finali.
+
+\section{Semantica assiomatica}
+TODO
 \end{document}
 
 
