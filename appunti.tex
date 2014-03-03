@@ -183,7 +183,18 @@ Sia $\unlhd$ la chiusura riflessiva e transitiva di $\lhd \ \bnfn$ su $A$.
   \]
   Osserviamo che abbiamo espresso un ordine per gli elementi 0, 1, qust'ordine per semplicita lo possiamo prenderla dalla semantica induttiva sui numeri naturali.
 \end{es}
-
+\begin{teo}[Principio d'induzione sulle grammatiche libere dal contesto]
+  \[
+    \forall \omega \in L(G).\prop(\omega) \Leftrightarrow
+  \]
+  \[
+    \forall A = x_1,...,x_n \in P \;
+      ([\bigwedge_{i=1}^{n} \forall \omega \in L(x_i).\prop(\omega)]) 
+      \Rightarrow \forall \omega \in L(x_1,...,x_n).\prop(\omega))
+  \]
+  Per ogni produzione, le stringhe generate da ogni simbolo del lato sinistro soddisfano $\prop$ implica che le stringhe generate dall'intera produzione soddisfano $\prop$, questo è equivalente a dire che $\prop$ vale per ogni stringa appartenente al linguaggio.
+      
+\end{teo}
 
 \chapter{Definizione di Linguaggio}
 TODO
