@@ -160,6 +160,21 @@ Sia $\unlhd$ la chiusura riflessiva e transitiva di $\lhd \ \bnfn$ su $A$.
   In questo caso, $f = \mathtt{Fact}$ e $F$ è la moltiplicazione.\\
   $f(n)=F(n,f(n-1))=n \cdot f(n-1)$
 \end{es}
+\newpage{}
+\begin{teo}[di induzione sulle grammatiche libere dal contesto] 
+  Dato:
+  \[
+    G = \{N, \Sigma, P, S\}
+  \]
+  \[
+    \lhd \subseteq (N \cup \Sigma) \times (N \cup \Sigma)^+
+  \]
+  \[
+    \forall A = x_1,...,x_n \in \prop, x_1 \lhd x_2 \lhd ... \lhd x_n
+  \]
+\end{teo}
+  Dall'ultima possiamo osservare che la funghezza della stringa piu piccola e mionore della lunghezza dell'intera stringa, quindi non posso creare catente infinitamente discendenti, per questo la relazione sulle stringhe di un linguaggio si puo considerare ben fondata.
+
 
 \chapter{Definizione di Linguaggio}
 TODO
