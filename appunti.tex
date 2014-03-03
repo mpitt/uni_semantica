@@ -52,7 +52,7 @@ Sia $\unlhd$ la chiusura riflessiva e transitiva di $\lhd \ \bnfn$ su $A$.
 \begin{proof}
   \begin{itemize}
     \item{$\Rightarrow$)} Da $ B \subseteq A$ e $(A, \lhd) \bnfn$ si ha che
-      non esiste $\ldots \lhd b_i \lhd \ldots \lhd b_0$, quindi 
+      non esiste $\ldots \lhd b_i \lhd \ldots \lhd b_0$, quindi
       $\exists b_n \tc b_n \lhd \ldots \lhd b_i \lhd \ldots \lhd b_0$
       ovvero $b_n$ è minimale in $B$ rispetto a $\lhd$.
     \item{$\Leftarrow$)} Per assurdo. Supponiamo che esista
@@ -68,8 +68,8 @@ Sia $\unlhd$ la chiusura riflessiva e transitiva di $\lhd \ \bnfn$ su $A$.
 \begin{teo}[Principio di induzione noetheriana (prima forma)]
   Sia $\prop$ una proprietà su $(A, \lhd) \bnfn$.\\
   \[
-    \forall a \in A.\prop(a) \Leftrightarrow 
-    \forall a \in A.([\forall b \lhd a . \prop(b)] 
+    \forall a \in A.\prop(a) \Leftrightarrow
+    \forall a \in A.([\forall b \lhd a . \prop(b)]
     \Rightarrow \prop(a))
   \]
 \end{teo}
@@ -87,7 +87,7 @@ Sia $\unlhd$ la chiusura riflessiva e transitiva di $\lhd \ \bnfn$ su $A$.
         \exists c \in A .\neg\prop(c)
       \end{equation}
       Sia $C=\{c \in A | \neg \prop(c)\} \subseteq A$.\\
-      Per il lemma \ref{lemma:2}, $\exists \hat{c}$ minimale di $C$ rispetto a 
+      Per il lemma \ref{lemma:2}, $\exists \hat{c}$ minimale di $C$ rispetto a
       $\lhd$, allora $\neg \prop(\hat{c})$\\
       Per $\hat{c}$ minimale, $\forall b \lhd \hat{c}.b \not\in C$, allora
       $\prop(b)$, ovvero per (1.1) $\prop(\hat{c})$
@@ -102,8 +102,8 @@ Sia $\unlhd$ la chiusura riflessiva e transitiva di $\lhd \ \bnfn$ su $A$.
 \begin{teo}[Principio di induzione noetheriana - seconda forma]
   Sia $\prop$ una proprietà su $(A, \lhd) \bnfn$.\\
   \[
-    \forall a \in A.\prop(a) \Leftrightarrow 
-    \begin{pmatrix} 
+    \forall a \in A.\prop(a) \Leftrightarrow
+    \begin{pmatrix}
       \forall a \in \base{A}.\prop(a)\\
       \wedge\\
       \forall a \in (A \setminus \base{A})
@@ -118,8 +118,8 @@ Sia $\unlhd$ la chiusura riflessiva e transitiva di $\lhd \ \bnfn$ su $A$.
   Osserviamo che $\lhd$ è ben fondata: $0\lhd1\lhd2\lhd\dots$.\\
   Osserviamo $\base{\mathbb{N}}=\{0\}$.
   \[
-    \forall m \in \mathbb{N}.\prop(m) \Leftrightarrow 
-    \begin{pmatrix} 
+    \forall m \in \mathbb{N}.\prop(m) \Leftrightarrow
+    \begin{pmatrix}
       \prop(0)\\
       \wedge\\
       \forall m > 0
@@ -161,7 +161,7 @@ Sia $\unlhd$ la chiusura riflessiva e transitiva di $\lhd \ \bnfn$ su $A$.
   $f(n)=F(n,f(n-1))=n \cdot f(n-1)$
 \end{es}
 \newpage{}
-\begin{teo}[di induzione sulle grammatiche libere dal contesto] 
+\begin{teo}[di induzione sulle grammatiche libere dal contesto]
   Dato:
   \[
     G = \{N, \Sigma, P, S\}
@@ -189,7 +189,7 @@ Sia $\unlhd$ la chiusura riflessiva e transitiva di $\lhd \ \bnfn$ su $A$.
   \]
   \[
     \forall A = x_1,...,x_n \in P \;
-      ([\bigwedge_{i=1}^{n} \forall \omega \in L(x_i).\prop(\omega)]) 
+      ([\bigwedge_{i=1}^{n} \forall \omega \in L(x_i).\prop(\omega)])
       \Rightarrow \forall \omega \in L(x_1,...,x_n).\prop(\omega))
   \]
   Per ogni produzione, le stringhe generate da ogni simbolo del lato sinistro soddisfano $\prop$ implica che le stringhe generate dall'intera produzione soddisfano $\prop$, questo è equivalente a dire che $\prop$ vale per ogni stringa appartenente al linguaggio.
@@ -202,17 +202,17 @@ Sia $\unlhd$ la chiusura riflessiva e transitiva di $\lhd \ \bnfn$ su $A$.
   \[
     \omega' \in L(B) \Rightarrow \text{$\omega$ è un numero pari}
   \]
-  \textbf{Soluzione:} \\ 
-  Riscrittra principio d'induzione prima in maniera compatta poi in maniera esplicita
+  \textbf{Soluzione:} \\
+  Riscrittura principio d'induzione prima in maniera compatta poi in maniera esplicita
    \[
-    ([\bigwedge_{i=1}^{n} \forall \omega \in L(x_i).\prop(\omega)]) 
+    ([\bigwedge_{i=1}^{n} \forall \omega \in L(x_i).\prop(\omega)])
     \Rightarrow \forall \omega \in L(B0).\prop(\omega))
   \]
   \[
-    (\forall \omega \in L(B).\prop(\omega)]) 
+    (\forall \omega \in L(B).\prop(\omega)])
     \Rightarrow \forall \omega \in L(B0).\prop(\omega))
   \]
-  Se riesco a dimostrare che la proprietà è vera per tutte le stringhe formate da $B$, allora posso assumere che per tutte le stringhe che conterranno $B0$ la proprietà sarà vera. ($0$ è un caso base e lo diamo per vero)   
+  Se riesco a dimostrare che la proprietà è vera per tutte le stringhe formate da $B$, allora posso assumere che per tutte le stringhe che conterranno $B0$ la proprietà sarà vera. ($0$ è un caso base e lo diamo per vero)
 
 \end{es}
 
@@ -245,7 +245,7 @@ TODO
 \end{defi}
 \newpage
 \section{Semantica operazionale}
-\begin{defi} 
+\begin{defi}
 Un {\bf sistema di transizione} $T_G$ \'e un grafo t.c.
 $$
 T_G = ( P \times \rho , \longrightarrow , I , F  )
@@ -261,10 +261,10 @@ dove
 \end{defi}
 
 \begin{defi}
-La {\bf semantica operazionale} \'e una funzione 
+La {\bf semantica operazionale} \'e una funzione
 $$
 \mathlarger{\mathlarger{\mathlarger{\varepsilon_{op}}}} : L(G) \times \mathlarger{\mathlarger{\rho}}_{init} \longrightarrow T_G
-$$ 
+$$
 \end{defi}
 
 \section{Semantica denotazionale}
@@ -279,5 +279,3 @@ Rappresenta solo il risultato dell'esecuzione del programma, ovvero l'insieme de
 \section{Semantica assiomatica}
 TODO
 \end{document}
-
-
