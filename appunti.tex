@@ -226,75 +226,106 @@ la propriet\'a per cui ciascuna stringa deve essere funzione solo dei componenti
 \paragraph{Modularit\'a:}
 la propriet\'a per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo ridefinire la semantica dello stesso.
 \begin{itemize}
-\item posso quindi definire un linguaggio in maniera incrementale, ovvero, partendo da un nucleo centrale, posso aggiungere dello "zucchero sintattico" senza modificare il nucleo di partenza.
+	\item posso quindi definire un linguaggio in maniera incrementale, ovvero, partendo da un nucleo centrale, posso aggiungere dello "zucchero sintattico" senza modificare il nucleo di partenza.
 \end{itemize}
 
 \chapter{Semantica}
 \begin{itemize}
-\item {\bf Operazionale:} COME eseguire un programma $P$.
-\item {\bf Denotazionale:} CHE COSA si ottiene dall'esecuzione di $P$.
-\item {\bf Assiomatica:} verifica SE il programma \'e corretto rispetto ad una data propriet\'a.
+	\item {\bf Operazionale:} COME eseguire un programma $P$.
+	\item {\bf Denotazionale:} CHE COSA si ottiene dall'esecuzione di $P$.
+	\item {\bf Assiomatica:} verifica SE il programma \'e corretto rispetto ad una data propriet\'a.
 \end{itemize}
-
 \begin{defi} dato un programma $P$:
-\begin{equation}
-{\ldots}z:=2; y:=z; y:=y+1; z:=y{\ldots}
-\end{equation}
-il {\bf supporto a tempo di esecuzione} \'e definito come:
-\begin{equation}
-[z=0, y=0] \equiv \rho(z) = 0, \rho(y) = 0
-\end{equation}
-TODO
+	\begin{equation}
+		{\ldots}z:=2; y:=z; y:=y+1; z:=y{\ldots}
+	\end{equation}
+	il {\bf supporto a tempo di esecuzione} \'e definito come:
+	\begin{equation}
+		[z=0, y=0] \equiv \rho(z) = 0, \rho(y) = 0
+	\end{equation}
+	TODO
 \end{defi}
-\newpage
+
+\section{Definizione formale}
+\begin{defi}
+	Una semantica \'e una quadrupla:
+	$$
+	\left(L,M, \varepsilon_{i\in I}, \equiv_m\right)
+	$$
+	dove:
+	\begin{itemize}
+		\item $L$ \'e il linguaggio oggetto. $l$ $\in$ $L$ sono le stringhe del linguaggio a cui bisogna assegnare un significato.
+		\item $M$ \'e il meta linguaggio, che definisce gli oggetti che si usano per assegnare la semantica (o il significato) ad $L$ $\Rightarrow \forall l \in L \exists m \in M . m(l) = \mathrm{significato}$.
+		\item $\varepsilon_{i\in I}$ sono funzioni di interpretazione semantica $\Rightarrow \varepsilon_{i\in I} : L \rightarrow M $.
+		\item $\equiv_m$ \'e l'equivalenza semantica $\subseteq M \times M$.
+	\end{itemize}
+\end{defi}
+\begin{lemma}
+	\begin{equation}
+		l,l' \in L, l \equiv_l l' \Longleftrightarrow \varepsilon[\l] \equiv_m \varepsilon[l']
+	\end{equation}
+	\begin{proof}
+		L'equivalenza sul linguaggio esiste solo e soltanto se gli elementi del meta linguaggio ( $\varepsilon[l] \in M$ ) sono equivalenti.
+	\end{proof}
+\end{lemma}
+\begin{lemma}
+	\begin{equation}
+		\equiv_M = \mathrm{id} \nRightarrow \equiv_L = \mathrm{id}
+	\end{equation}
+	\begin{proof}
+		Se l'equivalenza su $M$ \'e l'identit\'a ci\'o non implica la stessa propriet\'a per l'equivalenza sul linguaggio $L$ (?)
+	\end{proof}
+\end{lemma}
+
+
 \section{Semantica operazionale}
 \begin{defi}
-Un {\bf sistema di transizione} $T_G$ \'e un grafo t.c.
-$$
-T_G = ( P \times \rho , \longrightarrow , I , F  )
-$$
-dove
-\begin{itemize}
-\item $P$ sono i programmi (ad es. assegnazioni di (3.1))
-\item $\rho$ sono gli ambienti del supporto a tempo di esecuzione (ad es. (3.2))
-\item $ \longrightarrow \, \, \subseteq ( P , \rho ) \times ( P , \rho ) $
-\item $ I \subseteq ( P,\rho)$ iniziali
-\item $ F \subseteq (P, \rho)$ finali
-\end{itemize}
+	Un {\bf sistema di transizione} $T_G$ \'e un grafo t.c.
+	$$
+	T_G = ( P \times \rho , \longrightarrow , I , F  )
+	$$
+	dove
+	\begin{itemize}
+		\item $P$ sono i programmi (ad es. assegnazioni di (3.1))
+		\item $\rho$ sono gli ambienti del supporto a tempo di esecuzione (ad es. (3.2))
+		\item $ \longrightarrow \, \, \subseteq ( P , \rho ) \times ( P , \rho ) $
+		\item $ I \subseteq ( P,\rho)$ iniziali
+		\item $ F \subseteq (P, \rho)$ finali
+	\end{itemize}
 \end{defi}
-
 \begin{defi}
-La {\bf semantica operazionale} \'e una funzione
-$$
-\mathlarger{\mathlarger{\mathlarger{\varepsilon_{op}}}} : L(G) \times \mathlarger{\mathlarger{\rho}}_{init} \longrightarrow T_G
-$$
+	La {\bf semantica operazionale} \'e una funzione
+	$$
+	\mathlarger{\mathlarger{\mathlarger{\varepsilon_{op}}}} : L(G) \times \mathlarger{\mathlarger{\rho}}_{init} \longrightarrow T_G
+	$$
 \end{defi}
 
 \section{Semantica denotazionale}
 \begin{defi}
-La {\bf semantica denotazionale} \'e definita come
-$$
-\mathlarger{\mathlarger{\mathlarger{\varepsilon_{den}}}} : L(G) \times \mathlarger{\mathlarger{\rho}}_{init} \longrightarrow \mathlarger{\mathlarger{\rho}}_{fin}
-$$
+	La {\bf semantica denotazionale} \'e definita come
+	$$
+	\mathlarger{\mathlarger{\mathlarger{\varepsilon_{den}}}} : L(G) \times \mathlarger{\mathlarger{\rho}}_{init} \longrightarrow \mathlarger{\mathlarger{\rho}}_{fin}
+	$$
 \end{defi}
 Rappresenta solo il risultato dell'esecuzione del programma, ovvero l'insieme degli ambienti finali.
 
 \section{Semantica assiomatica}
 \begin{defi}
-Una {\bf regola di inferenza} stabilisce che:
-$$
-\frac{p_1 \wedge \ldots \wedge p_n}{C}
-$$
-se $ p_1 \wedge \ldots \wedge p_n $ sono vere allora $C$ \'e vera.
+	Una {\bf regola di inferenza} stabilisce che:
+	$$
+	\frac{p_1 \wedge \ldots \wedge p_n}{C}
+	$$
+	se $ p_1 \wedge \ldots \wedge p_n $ sono vere allora $C$ \'e vera.
 \end{defi}
 \begin{defi}
-Ho un {\bf assioma} se:
-$$
-\frac[20pt]{}{C}
-$$
-ovvero se non ho propriet\'a su cui basare la conclusione.
+	Ho un {\bf assioma} se:
+	$$
+	\frac[20pt]{}{C}
+	$$
+	ovvero se non ho propriet\'a su cui basare la conclusione.
 \end{defi}
 \begin{defi}
-La {\bf semantica assiomatica} \'e definita sulla base di regole di inferenza ed assiomi, e dimostra la verdicit\'a di un programma costruendo un albero le cui foglie sono tutte {\bf assiomi}.
+	La {\bf semantica assiomatica} \'e definita sulla base di regole di inferenza ed assiomi, e dimostra la verdicit\'a di un programma costruendo un albero le cui foglie sono tutte {\bf assiomi}.
 \end{defi}
+
 \end{document}
