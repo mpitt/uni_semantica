@@ -21,6 +21,9 @@
 \theoremstyle{plain} \newtheorem{teo}{Teorema}
 \theoremstyle{remark} \newtheorem*{es}{Esempio}
 
+\DeclareRobustCommand{\frac}[3][0pt]{%
+  {\begingroup\hspace{#1}#2\hspace{#1}\endgroup\over\hspace{#1}#3\hspace{#1}}}
+
 \begin{document}
 \chapter{Induzione strutturale}
 \section*{Introduzione}
@@ -277,5 +280,21 @@ $$
 Rappresenta solo il risultato dell'esecuzione del programma, ovvero l'insieme degli ambienti finali.
 
 \section{Semantica assiomatica}
-TODO
+\begin{defi}
+Una {\bf regola di inferenza} stabilisce che:
+$$
+\frac{p_1 \wedge \ldots \wedge p_n}{C}
+$$
+se $ p_1 \wedge \ldots \wedge p_n $ sono vere allora $C$ \'e vera.
+\end{defi}
+\begin{defi}
+Ho un {\bf assioma} se:
+$$
+\frac[20pt]{}{C}
+$$
+ovvero se non ho propriet\'a su cui basare la conclusione.
+\end{defi}
+\begin{defi}
+La {\bf semantica assiomatica} \'e definita sulla base di regole di inferenza ed assiomi, e dimostra la verdicit\'a di un programma costruendo un albero le cui foglie sono tutte {\bf assiomi}.
+\end{defi}
 \end{document}
