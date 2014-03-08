@@ -1,6 +1,6 @@
 %        File: appunti.tex
-%     Created: Mon Feb 24 02:00 PM 2014 C
-% Last Change: Mon Feb 24 02:00 PM 2014 C
+%    	Created: Mon Feb 24 02:00 PM 2014 C
+% 	Last Change: Sat 08 Mar 18:00 PM 2014 C by Leo
 %
 \documentclass[a4paper]{report}
 \usepackage[utf8]{inputenc}
@@ -231,11 +231,11 @@ la propriet\'a per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo
 
 \chapter{Semantica}
 \begin{itemize}
-	\item {\bf Operazionale:} COME eseguire un programma $P$.
-	\item {\bf Denotazionale:} CHE COSA si ottiene dall'esecuzione di $P$.
-	\item {\bf Assiomatica:} verifica SE il programma \'e corretto rispetto ad una data propriet\'a.
+	\item {\bf Operazionale:} COME eseguire un programma $\prop$.
+	\item {\bf Denotazionale:} CHE COSA si ottiene dall'esecuzione di $\prop$.
+	\item {\bf Assiomatica:} verifica SE il programma $\prop$ \'e corretto rispetto ad una data propriet\'a.
 \end{itemize}
-\begin{defi} dato un programma $P$:
+\begin{defi} dato un programma $\prop$:
 	\begin{equation}
 		{\ldots}z:=2; y:=z; y:=y+1; z:=y{\ldots}
 	\end{equation}
@@ -249,13 +249,13 @@ la propriet\'a per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo
 \section{Definizione formale}
 \begin{defi}
 	Una semantica \'e una quadrupla:
-	$$
+	\begin{equation}
 	\left(L,M, \varepsilon_{i\in I}, \equiv_m\right)
-	$$
+	\end{equation}
 	dove:
 	\begin{itemize}
 		\item $L$ \'e il linguaggio oggetto. $l$ $\in$ $L$ sono le stringhe del linguaggio a cui bisogna assegnare un significato.
-		\item $M$ \'e il meta linguaggio, che definisce gli oggetti che si usano per assegnare la semantica (o il significato) ad $L$ $\Rightarrow \forall l \in L \exists m \in M . m(l) = \mathrm{significato}$.
+		\item $M$ \'e il meta linguaggio, che definisce gli oggetti che si usano per assegnare la semantica (o il significato) ad $L$ $\Rightarrow \forall l \in L \exists m \in M | m(l) = \mathrm{significato}$.
 		\item $\varepsilon_{i\in I}$ sono funzioni di interpretazione semantica $\Rightarrow \varepsilon_{i\in I} : L \rightarrow M $.
 		\item $\equiv_m$ \'e l'equivalenza semantica $\subseteq M \times M$.
 	\end{itemize}
@@ -282,15 +282,15 @@ la propriet\'a per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo
 \begin{defi}
 	Un {\bf sistema di transizione} $T_G$ \'e un grafo t.c.
 	$$
-	T_G = ( P \times \rho , \longrightarrow , I , F  )
+	T_G = ( \prop \times \rho , \longrightarrow , I , F  )
 	$$
 	dove
 	\begin{itemize}
-		\item $P$ sono i programmi (ad es. assegnazioni di (3.1))
+		\item $\prop$ sono i programmi (ad es. assegnazioni di (3.1))
 		\item $\rho$ sono gli ambienti del supporto a tempo di esecuzione (ad es. (3.2))
-		\item $ \longrightarrow \, \, \subseteq ( P , \rho ) \times ( P , \rho ) $
-		\item $ I \subseteq ( P,\rho)$ iniziali
-		\item $ F \subseteq (P, \rho)$ finali
+		\item $ \longrightarrow \, \, \subseteq ( \prop , \rho ) \times ( \prop , \rho ) $
+		\item $ I \subseteq ( \prop,\rho)$ iniziali
+		\item $ F \subseteq (\prop, \rho)$ finali
 	\end{itemize}
 \end{defi}
 \begin{defi}
@@ -298,6 +298,13 @@ la propriet\'a per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo
 	$$
 	\mathlarger{\mathlarger{\mathlarger{\varepsilon_{op}}}} : L(G) \times \mathlarger{\mathlarger{\rho}}_{init} \longrightarrow T_G
 	$$
+	utilizzando la definizione formale (3.3) definiamo:
+	\begin{itemize}
+		\item $L$ : linguaggio oggetto (che definiamo)
+		\item $M$: $<S, \longrightarrow>$ dove $S = \{ <l, \rho : \mathrm{Var}(l)\longrightarrow\mathrm{Val} >| l\in L\}$ ovvero tutti i possibili stati di tutti i possibili programmi generati da $L$, e $\longrightarrow \subseteq S \times S$
+		\item $\varepsilon_{i \in I} \equiv $ definizione operativa data a inizio paragrafo.
+		\item $\equiv_M$ \'e l'identit\'a sui grafi (isomorfismo)
+	\end{itemize}
 \end{defi}
 
 \section{Semantica denotazionale}
@@ -306,6 +313,13 @@ la propriet\'a per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo
 	$$
 	\mathlarger{\mathlarger{\mathlarger{\varepsilon_{den}}}} : L(G) \times \mathlarger{\mathlarger{\rho}}_{init} \longrightarrow \mathlarger{\mathlarger{\rho}}_{fin}
 	$$
+	utilizzando la definizione formale (3.3):
+	\begin{itemize}
+		\item $L$ \'e il linguaggio che definiamo
+		\item $M=\{ \rho : \mathrm{Var}(l) \longrightarrow \mathrm{Val} | l \in L \}$ ovvero l'insieme delle funzioni che danno valore alle variabili di $L$.
+		\item $\varepsilon_{i\in I} : L\longrightarrow M , l \longrightarrow \mathrm{val}$
+		\item $\equiv_m$ \'e l'identit\'a
+	\end{itemize}
 \end{defi}
 Rappresenta solo il risultato dell'esecuzione del programma, ovvero l'insieme degli ambienti finali.
 
@@ -326,6 +340,13 @@ Rappresenta solo il risultato dell'esecuzione del programma, ovvero l'insieme de
 \end{defi}
 \begin{defi}
 	La {\bf semantica assiomatica} \'e definita sulla base di regole di inferenza ed assiomi, e dimostra la verdicit\'a di un programma costruendo un albero le cui foglie sono tutte {\bf assiomi}.
+	\\
+	Utilizzando la definizione formale di semantica a (3.3):
+	\begin{itemize}
+		\item $L$ \'e il linguaggio che definiamo
+		\item $M$ \'e l'insieme di alberi di derivazione per $l\in L$
+		\item $\varepsilon_{i\in I}$ sono le interpretazioni degli assiomi e delle regole di inferenza
+		\item $\equiv_M$ \'e l'identit\'a sugli alberi di derivazione
+	\end{itemize}
 \end{defi}
-
 \end{document}
