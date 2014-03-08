@@ -349,4 +349,22 @@ Rappresenta solo il risultato dell'esecuzione del programma, ovvero l'insieme de
 		\item $\equiv_M$ \'e l'identit\'a sugli alberi di derivazione
 	\end{itemize}
 \end{defi}
+
+\section{Contesto}
+\begin{defi}
+	Un {\bf contesto} $C[\cdot]$ per un programma \'e un programma con un "buco" (una parte non specificata).
+	\end{defi}
+	\begin{enumerate}
+	\item {\bf Principio di Subsitutivity:}
+	\\
+	$l, l' \in L$ che possono comparire nello stesso contesto $C[\cdot]$:
+	$$
+		l \equiv_L l' \Rightarrow \forall C[\cdot] , C[l] \equiv_L C[l']
+	$$
+	\item {\bf Principio di Full abstraction:}
+	$$
+		l,l' \in L, \forall C[\cdot], C[l] \equiv_L C[l'] \Longrightarrow l \equiv_L l'
+	$$
+\end{enumerate}
+
 \end{document}
