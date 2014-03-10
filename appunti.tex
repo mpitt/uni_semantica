@@ -221,10 +221,10 @@ Sia $\unlhd$ la chiusura riflessiva e transitiva di $\lhd \ \bnfn$ su $A$.
 
 \chapter{Definizione di Linguaggio}
 TODO
-\paragraph{Composizionalit\'a:}
-la propriet\'a per cui ciascuna stringa deve essere funzione solo dei componenti della stringa stessa.
-\paragraph{Modularit\'a:}
-la propriet\'a per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo ridefinire la semantica dello stesso.
+\paragraph{Composizionalità:}
+la proprietà per cui ciascuna stringa deve essere funzione solo dei componenti della stringa stessa.
+\paragraph{Modularità:}
+la proprietà per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo ridefinire la semantica dello stesso.
 \begin{itemize}
 	\item posso quindi definire un linguaggio in maniera incrementale, ovvero, partendo da un nucleo centrale, posso aggiungere dello "zucchero sintattico" senza modificare il nucleo di partenza.
 \end{itemize}
@@ -233,13 +233,13 @@ la propriet\'a per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo
 \begin{itemize}
 	\item {\bf Operazionale:} COME eseguire un programma $\prop$.
 	\item {\bf Denotazionale:} CHE COSA si ottiene dall'esecuzione di $\prop$.
-	\item {\bf Assiomatica:} verifica SE il programma $\prop$ \'e corretto rispetto ad una data propriet\'a.
+	\item {\bf Assiomatica:} verifica SE il programma $\prop$ è corretto rispetto ad una data proprietà.
 \end{itemize}
 \begin{defi} dato un programma $\prop$:
 	\begin{equation}
 		{\ldots}z:=2; y:=z; y:=y+1; z:=y{\ldots}
 	\end{equation}
-	il {\bf supporto a tempo di esecuzione} \'e definito come:
+	il {\bf supporto a tempo di esecuzione} è definito come:
 	\begin{equation}
 		[z=0, y=0] \equiv \rho(z) = 0, \rho(y) = 0
 	\end{equation}
@@ -248,21 +248,21 @@ la propriet\'a per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo
 
 \section{Definizione formale}
 \begin{defi}
-	Una semantica \'e una quadrupla:
+	Una semantica è una quadrupla:
 	\begin{equation}
 	\left(L,M, \varepsilon_{i\in I}, \equiv_m\right)
 	\end{equation}
 	dove:
 	\begin{itemize}
-		\item $L$ \'e il linguaggio oggetto. $l$ $\in$ $L$ sono le stringhe del linguaggio a cui bisogna assegnare un significato.
-		\item $M$ \'e il meta linguaggio, che definisce gli oggetti che si usano per assegnare la semantica (o il significato) ad $L$ $\Rightarrow \forall l \in L \exists m \in M | m(l) = \mathrm{significato}$.
+		\item $L$ è il linguaggio oggetto. $l$ $\in$ $L$ sono le stringhe del linguaggio a cui bisogna assegnare un significato.
+		\item $M$ è il meta linguaggio, che definisce gli oggetti che si usano per assegnare la semantica (o il significato) ad $L$ $\Rightarrow \forall l \in L \exists m \in M | m(l) = \mathrm{significato}$.
 		\item $\varepsilon_{i\in I}$ sono funzioni di interpretazione semantica $\Rightarrow \varepsilon_{i\in I} : L \rightarrow M $.
-		\item $\equiv_m$ \'e l'equivalenza semantica $\subseteq M \times M$.
+		\item $\equiv_m$ è l'equivalenza semantica $\subseteq M \times M$.
 	\end{itemize}
 \end{defi}
 \begin{lemma}
 	\begin{equation}
-		l,l' \in L, l \equiv_l l' \Longleftrightarrow \varepsilon[\l] \equiv_m \varepsilon[l']
+		l,l' \in L, l \equiv_l l' \Longleftrightarrow \varepsilon[l] \equiv_m \varepsilon[l']
 	\end{equation}
 	\begin{proof}
 		L'equivalenza sul linguaggio esiste solo e soltanto se gli elementi del meta linguaggio ( $\varepsilon[l] \in M$ ) sono equivalenti.
@@ -273,14 +273,14 @@ la propriet\'a per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo
 		\equiv_M = \mathrm{id} \nRightarrow \equiv_L = \mathrm{id}
 	\end{equation}
 	\begin{proof}
-		Se l'equivalenza su $M$ \'e l'identit\'a ci\'o non implica la stessa propriet\'a per l'equivalenza sul linguaggio $L$ (?)
+		Se l'equivalenza su $M$ è l'identità ci\'o non implica la stessa proprietà per l'equivalenza sul linguaggio $L$ (?)
 	\end{proof}
 \end{lemma}
 
 
 \section{Semantica operazionale}
 \begin{defi}
-	Un {\bf sistema di transizione} $T_G$ \'e un grafo t.c.
+	Un {\bf sistema di transizione} $T_G$ è un grafo t.c.
 	$$
 	T_G = ( \prop \times \rho , \longrightarrow , I , F  )
 	$$
@@ -294,7 +294,7 @@ la propriet\'a per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo
 	\end{itemize}
 \end{defi}
 \begin{defi}
-	La {\bf semantica operazionale} \'e una funzione
+	La {\bf semantica operazionale} è una funzione
 	$$
 	\mathlarger{\mathlarger{\mathlarger{\varepsilon_{op}}}} : L(G) \times \mathlarger{\mathlarger{\rho}}_{init} \longrightarrow T_G
 	$$
@@ -303,22 +303,22 @@ la propriet\'a per cui, aggiungendo dei costrutti ad un linguaggio $L$, non devo
 		\item $L$ : linguaggio oggetto (che definiamo)
 		\item $M$: $<S, \longrightarrow>$ dove $S = \{ <l, \rho : \mathrm{Var}(l)\longrightarrow\mathrm{Val} >| l\in L\}$ ovvero tutti i possibili stati di tutti i possibili programmi generati da $L$, e $\longrightarrow \subseteq S \times S$
 		\item $\varepsilon_{i \in I} \equiv $ definizione operativa data a inizio paragrafo.
-		\item $\equiv_M$ \'e l'identit\'a sui grafi (isomorfismo)
+		\item $\equiv_M$ è l'identità sui grafi (isomorfismo)
 	\end{itemize}
 \end{defi}
 
 \section{Semantica denotazionale}
 \begin{defi}
-	La {\bf semantica denotazionale} \'e definita come
+	La {\bf semantica denotazionale} è definita come
 	$$
 	\mathlarger{\mathlarger{\mathlarger{\varepsilon_{den}}}} : L(G) \times \mathlarger{\mathlarger{\rho}}_{init} \longrightarrow \mathlarger{\mathlarger{\rho}}_{fin}
 	$$
 	utilizzando la definizione formale (3.3):
 	\begin{itemize}
-		\item $L$ \'e il linguaggio che definiamo
+		\item $L$ è il linguaggio che definiamo
 		\item $M=\{ \rho : \mathrm{Var}(l) \longrightarrow \mathrm{Val} | l \in L \}$ ovvero l'insieme delle funzioni che danno valore alle variabili di $L$.
 		\item $\varepsilon_{i\in I} : L\longrightarrow M , l \longrightarrow \mathrm{val}$
-		\item $\equiv_m$ \'e l'identit\'a
+		\item $\equiv_m$ è l'identità
 	\end{itemize}
 \end{defi}
 Rappresenta solo il risultato dell'esecuzione del programma, ovvero l'insieme degli ambienti finali.
@@ -329,30 +329,30 @@ Rappresenta solo il risultato dell'esecuzione del programma, ovvero l'insieme de
 	$$
 	\frac{p_1 \wedge \ldots \wedge p_n}{C}
 	$$
-	se $ p_1 \wedge \ldots \wedge p_n $ sono vere allora $C$ \'e vera.
+	se $ p_1 \wedge \ldots \wedge p_n $ sono vere allora $C$ è vera.
 \end{defi}
 \begin{defi}
 	Ho un {\bf assioma} se:
 	$$
 	\frac[20pt]{}{C}
 	$$
-	ovvero se non ho propriet\'a su cui basare la conclusione.
+	ovvero se non ho proprietà su cui basare la conclusione.
 \end{defi}
 \begin{defi}
-	La {\bf semantica assiomatica} \'e definita sulla base di regole di inferenza ed assiomi, e dimostra la verdicit\'a di un programma costruendo un albero le cui foglie sono tutte {\bf assiomi}.
+	La {\bf semantica assiomatica} è definita sulla base di regole di inferenza ed assiomi, e dimostra la verdicità di un programma costruendo un albero le cui foglie sono tutte {\bf assiomi}.
 	\\
 	Utilizzando la definizione formale di semantica a (3.3):
 	\begin{itemize}
-		\item $L$ \'e il linguaggio che definiamo
-		\item $M$ \'e l'insieme di alberi di derivazione per $l\in L$
+		\item $L$ è il linguaggio che definiamo
+		\item $M$ è l'insieme di alberi di derivazione per $l\in L$
 		\item $\varepsilon_{i\in I}$ sono le interpretazioni degli assiomi e delle regole di inferenza
-		\item $\equiv_M$ \'e l'identit\'a sugli alberi di derivazione
+		\item $\equiv_M$ è l'identità sugli alberi di derivazione
 	\end{itemize}
 \end{defi}
 
 \section{Contesto}
 \begin{defi}
-	Un {\bf contesto} $C[\cdot]$ per un programma \'e un programma con un "buco" (una parte non specificata).
+	Un {\bf contesto} $C[\cdot]$ per un programma è un programma con un "buco" (una parte non specificata).
 	\end{defi}
 	\begin{enumerate}
 	\item {\bf Principio di Subsitutivity:}
