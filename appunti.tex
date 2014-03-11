@@ -15,6 +15,8 @@
 \newcommand{\tc}{\ \mathrm{t.c.}\ }
 \newcommand{\prop}{\mathcal{P}}
 \newcommand{\base}[1]{\mathtt{base}_{#1}}
+\newcommand{\bop}{\ \mathrm{bop}\ }
+\newcommand{\uop}{\mathrm{uop}\ }
 
 \theoremstyle{definition} \newtheorem*{defi}{Def}
 \theoremstyle{plain} \newtheorem{lemma}{Lemma}
@@ -367,4 +369,74 @@ Rappresenta solo il risultato dell'esecuzione del programma, ovvero l'insieme de
 	$$
 \end{enumerate}
 
+\chapter{Semantica dinamica}
+\begin{defi}
+  La memoria è rappresentata da una funzione:
+  \begin{equation}
+    \sigma:\bigcup_{\tau \in \mathrm{STyp}} \mathrm{Loc}_\tau \rightarrow \mathrm{SVal} \cup \{?,\bot\}
+  \end{equation}
+  Dove $?$ rappresenta una locazione di memoria allocata e non inizializzata,
+  mentre $\bot$ rappresenta una locazione non allocata.\\
+  Si suppone per comodità che $\forall \tau.\lvert\mathrm{Loc}_\tau\rvert = \infty$,
+  ovvero che la memoria sia infinita.
+\end{defi}
+\begin{defi}
+  Si definisce l'estensione di $\sigma$ (definita su $L$) a $\sigma_0$ (definita su $L_0$)
+  \begin{equation}
+    \sigma[\sigma_0](l)=
+    \begin{cases}
+      \sigma_0(l) & \text{se } l \in L_0 \\
+      \sigma(l) & \text{se } l \in (L \setminus L_0)
+    \end{cases}
+  \end{equation}
+\end{defi}
+TODO: ambienti statici e dinamici e loro estensioni, compatibilità di amb.
+\section{Espressioni}
+Il linguaggio oggetto $l$ delle espressioni è generato dalla grammatica
+\[E \mathrel{::=} k\ | \mathrm{\ id\ } |\ E_0 \bop E_1\ |\ \uop E \]
+Il metalinguaggio $m$ è un grafo (sistema di transizione)
+\[(<\prop, \sigma>,\quad \mathbin{\rightarrow}_e \subseteq <\prop, \sigma> \times <\prop, \sigma>)\]
+Si procede per induzione sulla struttura della sintassi.\\
+I {\bf casi base} sono $k$ e id. $k$ è di per s\'e una configurazione finale.
+Per id si ha l'assioma:
+\begin{equation}
+  \frac{}{\rho \vdash <\mathrm{id}, \sigma> \mathbin{\rightarrow} <k,\sigma>, k=\sigma(\rho(\mathrm{id}))}
+\end{equation}
+Per $E_0 \bop E_1$ le ipotesi induttive sono $E_0, E_1$ e si hanno le regole:
+\begin{equation}
+  \frac{
+    \rho \vdash <E_0,\sigma> \mathbin{\rightarrow} <E_0',\sigma>
+  }{
+    \rho \vdash <E_0 \bop E_1,\sigma> \mathbin{\rightarrow} <E_0' \bop E_1,\sigma>
+  }
+\end{equation}
+\begin{equation}
+  \frac{
+    \rho \vdash <E_1,\sigma> \mathbin{\rightarrow} <E_1',\sigma>
+  }{
+    \rho \vdash <k_0 \bop E_1,\sigma> \mathbin{\rightarrow} <k_0 \bop E_1',\sigma>
+  }
+\end{equation}
+\begin{equation}
+  \frac{}{
+  \rho \vdash <k_0 \bop k_1,\sigma> \mathbin{\rightarrow} <k',\sigma>
+  }
+\end{equation}
+dove $k'$ è il risultato di $k_0 \bop k_1$.\\
+Per $\uop E$, l'ipotesi induttiva è $E$ e si hanno le regole:
+\begin{equation}
+  \frac{
+    \rho \vdash <E_0,\sigma> \mathbin{\rightarrow} <E_0',\sigma>
+  }{
+    \rho \vdash <\uop E_0,\sigma> \mathbin{\rightarrow} <\uop E_0',\sigma>
+  }
+\end{equation}
+\begin{equation}
+  \frac{}{
+  \rho \vdash <\uop k,\sigma> \mathbin{\rightarrow} <k',\sigma>
+  }
+\end{equation}
+dove $k'$ è il risultato di $\uop k_0$.
+
+TODO: esempio, nota sull'ordine di interpretazione
 \end{document}
