@@ -481,4 +481,56 @@ Per $\uop E$, l'ipotesi induttiva è $E$ e si hanno le regole:
 dove $k'$ è il risultato di $\uop k_0$.
 
 TODO: esempio, nota sull'ordine di interpretazione
+\section{Bound Identifiers, Free Identifiers}
+Un nome, all'interno di un programma, può apparire in posizione:
+\begin{description}
+  \item[di definizione] quando è definito
+  \item[legata] quando appare dopo essere stato definito, cioè si può
+    determinare la definizione corrispondente
+  \item[libera] quando appare senza essere stato definito
+\end{description}
+I nomi in posizione di definizione e legata sono detti {\em bound identifiers}.
+\\ I nomi in posizione libera sono detti {\em free identifiers}.
+\begin{defi}
+  Si definisce la funzione
+  \[\FI: \IDE \rightarrow \IDE\]
+  che restituisce l'insieme dei free isentifiers, e la funzione
+  \[\BI: \IDE \rightarrow \IDE\]
+  che restituisce l'insieme dei bound identifiers. Vale:
+  \[\forall \mathrm{prg}.\FI(\mathrm{prg})\cap \BI(\mathrm{prg})=\emptyset\]
+\end{defi}
+\begin{lemma}
+  Se in un'espressione sono presenti identificatori liberi non già definiti
+  altrove, l'espressione non può essere valutata.
+  \[\FI(E)\not\subseteq I \Rightarrow \Delta\not\vdash_I E:\tau\]
+  con $I=\{\mathrm{id}|\exists(\mathrm{id},\tau)\in\Delta\}$.
+  \begin{proof}
+    La premessa è equivalente ad affermare che
+    \[\exists x . x \in \FI(E) \wedge x \not\in I\]
+    Si dimostra per induzione sulla struttura della sintassi.
+
+    Per il caso base $k$, si ha $\FI(k)=\emptyset \subseteq I \forall I$.
+
+    Per il caso base id, si ha $\FI(\mathrm{id}) = \{\mathrm{id}\},
+      \mathrm{id} \not\in I$.
+    Da ciò $\Delta(\mathrm{id}) = \bot \Rightarrow \Delta \not\vdash_I \mathrm{id}:\tau$.
+
+    Per il passo induttivo $E_0 \bop E_1$, si ha che 
+    \[\exists x \in \FI(E_0 \bop E_1) \wedge x \not\in I\]
+    o anche, per la definizione di $\FI$
+    \[(\exists x \in \FI(E_0) \wedge x \not\in I) \vee (\exists x \in \FI(E_1) \wedge x \not\in I)\]
+    Nel primo caso, ciò equivale a dire che $\FI(E_0) \not\subseteq I
+    \perhpind
+    \Delta \not\vdash_I E_0 : \tau_0 \Rightarrow $ non vale la \ref{expr_stat_bop}.
+    Il secondo caso è simmetrico.
+
+    Per il passo induttivo $\uop E$, si ha che
+    \[\exists x \in \FI(\uop E)\]
+    o anche, per la definizione di $\FI$
+    \[\exists x \in \FI(E) \wedge x \not\in I
+      \perhpind
+    \Delta \not\vdash_I E : \tau\]
+    quindi non vale la \ref{expr_stat_uop}.
+  \end{proof}
+\end{lemma}
 \end{document}
