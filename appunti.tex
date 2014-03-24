@@ -381,7 +381,7 @@ Rappresenta solo il risultato dell'esecuzione del programma, ovvero l'insieme de
 	$$
 \end{enumerate}
 
-\chapter{Semantica dinamica}
+\chapter{Linguaggio imperativo: IMP}
 \begin{defi}
   La memoria è rappresentata da una funzione:
   \begin{equation}
@@ -406,6 +406,36 @@ TODO: ambienti statici e dinamici e loro estensioni, compatibilità di amb.
 \section{Espressioni}
 Il linguaggio oggetto $l$ delle espressioni è generato dalla grammatica
 \[E \mathrel{::=} k\ | \mathrm{\ id\ } |\ E_0 \bop E_1\ |\ \uop E \]
+\subsection{Semantica statica}
+\begin{equation}
+  \emptyset\vdash_I n:\text{int}
+  \label{expr_stat_const_int}
+\end{equation}
+\begin{equation}
+  \emptyset \vdash (tt|ff):\text{bool}
+  \label{expr_stat_const_bool}
+\end{equation}
+\begin{equation}
+  \Delta \vdash \mathrm{id}:\Delta(\mathrm{id})
+  \label{expr_stat_id}
+\end{equation}
+\begin{equation}
+  \frac{
+    \Delta \vdash E_0:\tau_0, \Delta \vdash E_1:\tau_1
+  }{
+    \Delta \vdash E_0 \bop E_1:\tau_{\bop}(\tau_0,\tau_1)
+  }
+  \label{expr_stat_bop}
+\end{equation}
+\begin{equation}
+  \frac{
+    \Delta \vdash E : \tau
+  }{
+    \Delta \vdash \uop E : \tau_{\uop}(\tau)
+  }
+  \label{expr_stat_uop}
+\end{equation}
+\subsection{Semantica dinamica}
 Il metalinguaggio $m$ è un grafo (sistema di transizione)
 \[(<\prop, \sigma>,\quad \mathbin{\rightarrow}_e \subseteq <\prop, \sigma> \times <\prop, \sigma>)\]
 Si procede per induzione sulla struttura della sintassi.\\
