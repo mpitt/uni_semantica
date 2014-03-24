@@ -533,4 +533,78 @@ I nomi in posizione di definizione e legata sono detti {\em bound identifiers}.
     quindi non vale la \ref{expr_stat_uop}.
   \end{proof}
 \end{lemma}
+\section{Dichiarazioni}
+
+Il linguaggio $l$ delle dichiarazioni è quello generato dalla grammatica
+\[D ::= \nil | \const x:\tau = E | \var x:\tau = E
+| D_0;D_1 | D_0 \text{in} D_1 | D_0 \text{and} D_1\]
+
+La funzione $\rho$ viene resa più efficiente per le costanti, trasformandola in
+\[\rho: \IDE \rightarrow  \Dval \cup \{?,\bot\}, \Dval = \Loc | k\]
+\[\rho(x) = k \Rightarrow x \text{ è costante}\]
+
+Per verificare la compatibilità $\Delta:\rho$ bisogna estendere $\Dtyp$,
+aggiungendo per ogni $\tau$ un tipo corrispondente $\tau\loc$,
+che indica una {\em locazione di tipo $\tau$}.
+\[\Delta \vdash E:\tau, \var x:\tau = E \leadsto \Delta \vdash x:\tau\loc\]
+
+\subsection{Free Identifiers}
+\begin{IEEEeqnarray}{rCl}
+  \FI(\nil) &=& \emptyset \\
+  \FI(\const x:\tau = E) &=& \FI(E) \\
+  \FI(\var x:\tau = E) &=& \FI(E) \\
+  \FI(D_0;D_1) &=& \FI(D_0) \cup (\FI(D_1) \setminus \BI(D_0)) \\
+  \FI(D_0 \mathrm{in} D_1) &=& \FI(D_0) \cup (\FI(D_1) \setminus \BI(D_0)) \\
+  \FI(D_0 \mathrm{and} D_1) &=& \FI(D_0) \cup \FI(D_1)
+\end{IEEEeqnarray}
+
+\subsection{Semantica statica}
+\begin{equation}
+  \frac{}{
+    \Delta \vdash \nil : \Delta
+  }
+  \label{decl_stat_nil}
+\end{equation}
+\begin{equation}
+  \frac{
+    \Delta \vdash_I E:\tau
+  }{
+    \Delta \vdash \const x:\tau = E : [x:\tau]
+  }
+  \label{decl_stat_const}
+\end{equation}
+\begin{equation}
+  \frac{
+    \Delta \vdash_I E:\tau
+  }{
+    \Delta \vdash \var x:\tau = E : [x:\tau\loc]
+  }
+  \label{decl_stat_var}
+\end{equation}
+\begin{equation}
+  \frac{
+    \Delta \vdash D_0:\Delta_0, \Delta[\Delta_0] \vdash D_1:\Delta_1
+  }{
+    \Delta \vdash D_0;D_1 : \Delta_0[\Delta_1]
+  }
+  \label{decl_stat_seq}
+\end{equation}
+\begin{equation}
+  \frac{
+    \Delta \vdash D_0:\Delta_0, \Delta[\Delta_0] \vdash D_1:\Delta_1
+  }{
+    \Delta \vdash D_0 \mathrm{in} D_1 : \Delta_1
+  }
+  \label{decl_stat_in}
+\end{equation}
+\begin{equation}
+  \frac{
+    \Delta \vdash D_0:\Delta_0, \Delta \vdash D_1:\Delta_1
+  }{
+    \Delta \vdash D_0 \mathrm{and} D_1 : \Delta_0,\Delta_1
+  }
+  \label{decl_stat_and}
+\end{equation}
+Nell'ultimo caso, si ha la condizione che gli insiemi degli identificatori di
+$D_0$ e $D_1$ siano distinti. Si considera inoltre $\Delta_0,\Delta_1=\Delta_0[\Delta_1]=\Delta_1[\Delta_0]$.
 \end{document}
